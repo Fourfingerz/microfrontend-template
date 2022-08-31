@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { 
   StylesProvider,
   createGenerateClassName 
 } from '@material-ui/core/styles';
 
-import MarketingApp from './components/MarketingApp';
-import AuthApp from './components/AuthApp';
+import Progress from './components/Progress';
 import Header from './components/Header';
+
+// Lazy Loading!
+const MarketingLazy = lazy(() => import('./components/MarketingApp'));
+const AuthLazy = lazy(() => import('./components/AuthApp'));
 
 // Prevents class name collisions between auto-generated CSS class names 
 // ie: jss1 and jss1 from two microfrontends using the same material-ui StylesProvider
@@ -21,10 +24,12 @@ export default () => {
       <BrowserRouter>
         <div>
           <Header />
-          <Switch>
-            <Route path="/auth" component={AuthApp} />
-            <Route path="/" component={MarketingApp} />
-          </Switch>
+          <Suspense fallback={<Progress />}>
+            <Switch>
+              <Route path="/auth" component={AuthLazy} />
+              <Route path="/" component={MarketingLazy} />
+            </Switch>
+          </Suspense>
         </div>
       </BrowserRouter>
 		</StylesProvider>

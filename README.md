@@ -2,6 +2,9 @@
 
 The sizzling hotness these days in the FE world is "Micro". This is a template based on that architecture using best practices as of late 2022.
 
+## Features
+### - Lazy Loading
+
 ## Run Steps
 ### TO-DO...
 

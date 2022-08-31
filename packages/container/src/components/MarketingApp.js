@@ -10,6 +10,7 @@ export default () => {
     // Syncing react-router-dom's useHistory between parent 
     // container (this) and child app's MemoryHistory
     const { onParentNavigate } = mount(ref.current, {
+      initialPath: history.location.pathname,
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location;
 
