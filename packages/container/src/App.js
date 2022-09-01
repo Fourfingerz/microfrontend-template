@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { 
   StylesProvider,
@@ -19,14 +19,24 @@ const generateClassName = createGenerateClassName({
 });
 
 export default () => {
+  // This is a placeholder for ACTUAL user authentication
+  // This is just a dummy using minimal React state
+  // If you want a fully featured, working sign-in, 
+  // with user state, use something like REDUX to manage global state
+  // A service like Amazon Cognito also does this out of the box
+  // Example: https://github.com/dbroadhurst/aws-cognito-react
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
   return (
 		<StylesProvider generateClassName={generateClassName}>
       <BrowserRouter>
         <div>
-          <Header />
+          <Header onSignOut={() => setIsSignedIn(false)} isSignedIn={isSignedIn} />
           <Suspense fallback={<Progress />}>
             <Switch>
-              <Route path="/auth" component={AuthLazy} />
+              <Route path="/auth">
+                <AuthLazy onSignIn={() => setIsSignedIn(true)} />
+              </Route>
               <Route path="/" component={MarketingLazy} />
             </Switch>
           </Suspense>

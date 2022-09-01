@@ -1,3 +1,5 @@
+// Fancy Loading Progress Bar (Loading Spinner)
+
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
