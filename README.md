@@ -2,8 +2,13 @@
 
 The sizzling hotness these days in the FE world is "Micro". This is a template based on that architecture using best practices as of late 2022.
 
-## Features
-### - Lazy Loading
+## Philosophy / Things to Note
+#### * Your requirements drive your architecture
+#### * Always ask yourself "if I have to change this in the future, will I have to change another app?"
+#### * Everyone will eventually forget and/or abandon React
+#### * Don't forget to scope your CSS
+#### * Microfrontends might cause issues in production that you don't see in dev
+
 
 ## Run Steps
 ### TO-DO...
