@@ -22,7 +22,7 @@ const generateClassName = createGenerateClassName({
 
 const history = createBrowserHistory();
 
-// # aril
+// # dir
 
 export default () => {
   // This is a placeholder for ACTUAL user authentication
