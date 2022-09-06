@@ -1,0 +1,55 @@
+name: deploy-app-container
+
+on:
+  push:
+    branches:
+      - az
+    paths:
+      - 'packages/container/**'
+
+defaults:
+  run:
+    working-directory: packages/container
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+        env:
+          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
+
+      - uses: azure/login@v1
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+              az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container/latest' -s .
+      # - name: Purge CDN endpoint
+      #   uses: azure/CLI@v1
+      #   with:
+      #     inlineScript: |
+      #       az cdn endpoint purge --content-paths  "/*" --profile-name "CDN_PROFILE_NAME" --name "CDN_ENDPOINT" --resource-group "RESOURCE_GROUP"
+
+      # Azure logout
+      - name: logout
+        run: |
+              az logout
+        if: always()
+
+      # - uses: shinyinc/action-aws-cli@v1.2
+      # - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest --region ${{ env.AWS_DEFAULT_REGION }}
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html" --region ${{ env.AWS_DEFAULT_REGION }} 
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
