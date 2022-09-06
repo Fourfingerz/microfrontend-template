@@ -22,7 +22,7 @@ jobs:
         env:
           PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
       - run: ls -aril
-      - run: pwd
+      - run: echo ${pwd}/dist
 
       - uses: azure/login@v1
         with:
