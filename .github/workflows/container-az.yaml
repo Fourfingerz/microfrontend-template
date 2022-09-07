@@ -30,7 +30,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              cd dist && az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container' -s . --dryrun
+              cd dist && pwd && az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container' -s . --dryrun
       # - name: Purge CDN endpoint
       #   uses: azure/CLI@v1
       #   with:
