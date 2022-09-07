@@ -27,7 +27,7 @@ jobs:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - run: echo $GITHUB_WORKSPACE
-      - run: cd $GITHUB_WORKSPACE/dist && pwd && ls -aril
+      - run: cd $GITHUB_WORKSPACE && pwd && ls -aril
       # - name: upload to blob storage
       #   uses: azure/cli@v1
       #   with:
