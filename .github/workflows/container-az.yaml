@@ -21,7 +21,6 @@ jobs:
       - run: npm run build
         env:
           PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
-      - run: cd dist && pwd
 
       - uses: azure/login@v1
         with:
@@ -31,7 +30,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              cd && az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container' -s . --dryrun
+              cd dist && az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container' -s . --dryrun
       # - name: Purge CDN endpoint
       #   uses: azure/CLI@v1
       #   with:
