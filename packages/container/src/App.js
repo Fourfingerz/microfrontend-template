@@ -22,7 +22,6 @@ const generateClassName = createGenerateClassName({
 
 const history = createBrowserHistory();
 
-
 // # dir
 
 export default () => {
