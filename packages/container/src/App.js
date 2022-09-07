@@ -22,8 +22,6 @@ const generateClassName = createGenerateClassName({
 
 const history = createBrowserHistory();
 
-// # dir
-
 export default () => {
   // This is a placeholder for ACTUAL user authentication
   // This is just a dummy using minimal React state
