@@ -26,11 +26,12 @@ jobs:
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - run: cd dist && pwd
       - name: Upload to blob storage
         uses: azure/CLI@v1
         with:
           inlineScript: |
-              cd dist && pwd && az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container' -s . --dryrun
+              az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container' -s . --dryrun
       # - name: Purge CDN endpoint
       #   uses: azure/CLI@v1
       #   with:
