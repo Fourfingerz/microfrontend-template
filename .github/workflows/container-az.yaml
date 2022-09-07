@@ -26,12 +26,13 @@ jobs:
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - run: cd dist && pwd && ls -aril
-      - name: Upload to blob storage
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-              az storage blob upload-batch --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --auth-mode key -d '$web/container' -s ./dist --dryrun
+      - run: echo $GITHUB_WORKSPACE
+      - run: cd $GITHUB_WORKSPACE/dist && pwd && ls -aril
+      # - name: upload to blob storage
+      #   uses: azure/cli@v1
+      #   with:
+      #     inlinescript: |
+      #         az storage blob upload-batch --account-name ${{ secrets.storage_account_name }} --auth-mode key -d '$web/container' -s ./dist --dryrun
       # - name: Purge CDN endpoint
       #   uses: azure/CLI@v1
       #   with:
