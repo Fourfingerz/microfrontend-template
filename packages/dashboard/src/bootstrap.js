@@ -7,7 +7,6 @@ const mount = (el) => {
 	app.mount(el);
 };
 
-
 // If we are in dev mode and in isolation,
 // call mount immediately
 if (process.env.NODE_ENV === 'development') {
