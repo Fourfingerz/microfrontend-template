@@ -1,15 +1,15 @@
-name: deploy-app-container-azure
+name: deploy-marketing-azure
 
 on:
   push:
     branches:
       - az
     paths:
-      - 'packages/container/**'
+      - 'packages/marketing/**'
 
 defaults:
   run:
-    working-directory: packages/container
+    working-directory: packages/marketing
 
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
         uses: azure/cli@v1
         with:
           inlinescript: |
-              az storage blob upload-batch --account-name ${{ secrets.storage_account_name }} --auth-mode key -d '$web/container' -s $GITHUB_WORKSPACE/packages/container/dist
+              az storage blob upload-batch --account-name ${{ secrets.storage_account_name }} --auth-mode key -d '$web/container/marketing' -s $GITHUB_WORKSPACE/packages/marketing/dist
       # - name: Purge CDN endpoint
       #   uses: azure/CLI@v1
       #   with:
