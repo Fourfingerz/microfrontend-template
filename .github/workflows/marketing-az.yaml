@@ -29,6 +29,7 @@ jobs:
         with:
           inlinescript: |
               az storage blob upload-batch --account-name ${{ secrets.storage_account_name }} --auth-mode key -d '$web/container/marketing' -s $GITHUB_WORKSPACE/packages/marketing/dist
+              az storage blob upload-batch --account-name ${{ secrets.storage_account_name }} --auth-mode key -d '$web/marketing' -s $GITHUB_WORKSPACE/packages/marketing/dist
       # - name: Purge CDN endpoint
       #   uses: azure/CLI@v1
       #   with:

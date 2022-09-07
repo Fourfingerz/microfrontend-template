@@ -5,7 +5,6 @@ import { StylesProvider, createGenerateClassName } from '@material-ui/core/style
 import Landing from './components/Landing';
 import Pricing from './components/Pricing';
 
-
 // Prevents class name collisions between auto-generated CSS class names 
 // ie: jss1 and jss1 from two microfrontends using the same material-ui StylesProvider
 const generateClassName = createGenerateClassName({
