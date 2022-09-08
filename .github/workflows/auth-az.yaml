@@ -29,11 +29,11 @@ jobs:
         with:
           inlinescript: |
               az storage blob upload-batch --account-name ${{ secrets.storage_account_name }} --auth-mode key -d '$web/auth' -s $GITHUB_WORKSPACE/packages/auth/dist
-      # - name: Purge CDN endpoint
-      #   uses: azure/CLI@v1
-      #   with:
-      #     inlineScript: |
-      #       az cdn endpoint purge --content-paths  "/*" --profile-name "CDN_PROFILE_NAME" --name "CDN_ENDPOINT" --resource-group "RESOURCE_GROUP"
+      - name: Purge CDN endpoint
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ secrets.CDN_PROFILE_NAME }} --name ${{ secrets.CDN_ENDPOINT }} --resource-group ${{ secrets.RESOURCE_GROUP }}
 
       # Azure logout
       - name: logout
